@@ -24,18 +24,19 @@
         .section-sub { text-align: center; color: #94a3b8; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .card { background: #131b2e; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 16px; padding: 2.5rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: border-color 0.3s; }
-        .card:hover { border-color: rgba(192, 132, 252, 0.5); }
         .card h3 { color: #c084fc; margin-bottom: 1rem; font-size: 1.4rem; }
         .highlight { color: #ec4899; font-weight: 700; }
         ul { list-style: none; }
         ul li { padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
-        .calc-box { background: linear-gradient(135deg, #131b2e, #1e1b4b); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 20px; padding: 3rem; max-width: 700px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .calc-box { background: linear-gradient(135deg, #131b2e, #1e1b4b); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 20px; padding: 3rem; max-width: 750px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
         .calc-group { margin-bottom: 1.5rem; }
         .calc-group label { display: block; margin-bottom: 0.5rem; color: #c084fc; font-weight: 600; }
         .calc-group input { width: 100%; padding: 0.9rem; background: #0b0f19; border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 8px; color: #fff; font-size: 1.1rem; }
-        .calc-result { background: #0b0f19; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; border: 1px solid rgba(236, 72, 153, 0.3); }
-        .calc-result h4 { color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.5rem; }
-        .calc-result .val { font-size: 2rem; font-weight: 900; color: #ec4899; }
+        .calc-result { background: #0b0f19; border-radius: 14px; padding: 2rem; margin-top: 2rem; text-align: center; border: 1px solid rgba(236, 72, 153, 0.4); }
+        .calc-result .row-res { display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 1rem; color: #94a3b8; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; }
+        .calc-result .row-res strong { color: #fff; }
+        .val { font-size: 2.2rem; font-weight: 900; color: #ec4899; margin-top: 1rem; }
+        .next-tier-tip { background: rgba(168, 85, 247, 0.1); border: 1px dashed #c084fc; border-radius: 10px; padding: 0.8rem; margin-top: 1.5rem; color: #d8b4fe; font-size: 0.95rem; }
         footer { text-align: center; padding: 3rem; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; background: #0b0f19; }
     </style>
 </head>
@@ -73,22 +74,39 @@
     </div>
 
     <div class="container" id="calculator">
-        <h2 class="section-title">Calculator Venituri și Comision</h2>
-        <p class="section-sub">Simulează-ți câștigurile săptămânale în funcție de comenzile efectuate.</p>
+        <h2 class="section-title">Calculator Avansat de Venituri</h2>
+        <p class="section-sub">Introdu datele din aplicația ta (Glovo/Wolt/Bolt) pentru a vedea exact comisionul flotei și ce îți rămâne în buzunar.</p>
         
         <div class="calc-box">
             <div class="calc-group">
-                <label>Număr comenzi pe săptămână:</label>
-                <input type="number" id="orders" value="60" min="1" max="200" oninput="calculate()">
+                <label>📦 Număr comenzi livrate săptămâna aceasta:</label>
+                <input type="number" id="orders" value="65" min="1" max="250" oninput="calculate()">
             </div>
             <div class="calc-group">
-                <label>Câștig brut estimat (RON):</label>
-                <input type="number" id="earnings" value="1200" min="100" max="10000" oninput="calculate()">
+                <label>💰 Câștig brut estimat în aplicație (RON):</label>
+                <input type="number" id="earnings" value="1300" min="50" max="15000" oninput="calculate()">
             </div>
+            
             <div class="calc-result">
-                <h4>Comision aplicat & Câștig Net Flotă:</h4>
-                <div id="commRate" style="color: #c084fc; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem;">Comision: 7%</div>
-                <div class="val" id="netEarnings">1.116 RON</div>
+                <div class="row-res">
+                    <span>Comision aplicat:</span>
+                    <strong id="commRateText" style="color: #c084fc;">7% (Prag 1)</strong>
+                </div>
+                <div class="row-res">
+                    <span>Taxă reținută de flotă (Bubblehub):</span>
+                    <strong id="fleetFee" style="color: #ec4899;">91.00 RON</strong>
+                </div>
+                <div class="row-res">
+                    <span>Economie față de comisionul de 8%:</span>
+                    <strong id="savingsText" style="color: #4ade80;">13.00 RON câștigați în plus</strong>
+                </div>
+                
+                <h4 style="color: #94a3b8; font-size: 0.9rem; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Venitul tău net final</h4>
+                <div class="val" id="netEarnings">1,209.00 RON</div>
+                
+                <div class="next-tier-tip" id="nextTierTip">
+                    🚀 Mai ai nevoie de 10 comenzi ca să treci la Pragul următor (comision 6%)!
+                </div>
             </div>
         </div>
     </div>
@@ -123,24 +141,42 @@
             let earnings = parseFloat(document.getElementById('earnings').value) || 0;
             let rate = 0.08;
             let rateText = "8% (Standard)";
+            let nextTip = "";
 
             if (orders >= 125) {
                 rate = 0.04;
-                rateText = "4% (Maxim - Minim absolut)";
+                rateText = "4% (Prag 4 - Maxim)";
+                nextTip = "🏆 Ai atins comisionul minim absolut din piață (4%)! Ești un curier de top!";
             } else if (orders >= 100) {
                 rate = 0.045;
                 rateText = "4.5% (Prag 3)";
+                let diff = 125 - orders;
+                nextTip = `🔥 Mai ai nevoie de ${diff} comenzi ca să atingi comisionul minim absolut de 4%!`;
             } else if (orders >= 75) {
                 rate = 0.06;
                 rateText = "6% (Prag 2)";
+                let diff = 100 - orders;
+                nextTip = `🚀 Mai ai nevoie de ${diff} comenzi ca să treci la Pragul 3 (comision 4.5%)!`;
             } else if (orders >= 50) {
                 rate = 0.07;
                 rateText = "7% (Prag 1)";
+                let diff = 75 - orders;
+                nextTip = `⚡ Mai ai nevoie de ${diff} comenzi ca să treci la Pragul 2 (comision 6%)!`;
+            } else {
+                let diff = 50 - orders;
+                nextTip = `💡 Mai ai nevoie de ${diff} comenzi ca să intri în zona de bonus (Pragul 1 - 7%)!`;
             }
 
-            let net = earnings * (1 - rate);
-            document.getElementById('commRate').innerText = "Comision aplicat: " + rateText;
-            document.getElementById('netEarnings').innerText = net.toFixed(2) + " RON";
+            let standardFee = earnings * 0.08;
+            let fleetFee = earnings * rate;
+            let savings = standardFee - fleetFee;
+            let net = earnings - fleetFee;
+
+            document.getElementById('commRateText').innerText = rateText;
+            document.getElementById('fleetFee').innerText = fleetFee.toFixed(2) + " RON";
+            document.getElementById('savingsText').innerText = savings > 0 ? `+${savings.toFixed(2)} RON economisiți față de 8%` : "Nici o reducere (sub pragul de 50 comenzi)";
+            document.getElementById('netEarnings').innerText = net.toLocaleString('ro-RO', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " RON";
+            document.getElementById('nextTierTip').innerText = nextTip;
         }
         calculate();
     </script>

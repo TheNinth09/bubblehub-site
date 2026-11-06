@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubblehub SRL - Flotă Livrări Glovo, Wolt, Bolt Food</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background: #0b0f19; color: #fff; line-height: 1.6; }
+        header { background: #131b2e; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; color: #fff; }
+        .logo span { color: #c084fc; }
+        .hero { text-align: center; padding: 5rem 1rem; background: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 70%); }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; background: linear-gradient(135deg, #c084fc, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: #94a3b8; max-width: 600px; margin: 0 auto 2rem auto; font-size: 1.1rem; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 3rem 1rem; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .card { background: #131b2e; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card h3 { color: #c084fc; margin-bottom: 1rem; font-size: 1.3rem; }
+        .highlight { color: #ec4899; font-weight: 700; }
+        ul { list-style: none; }
+        ul li { padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+        footer { text-align: center; padding: 3rem; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">BUBBLE<span>HUB</span> SRL</div>
+        <div style="color: #c084fc; font-weight: 600; font-size: 0.9rem;">Fleet Partner</div>
+    </header>
+
+    <section class="hero">
+        <h1>Conduceți spre câștiguri maxime</h1>
+        <p>Partenerul tău premium pentru flote de livrări urbane (Glovo, Wolt, Bolt Food). Comision flexibil bazat pe praguri de performanță!</p>
+    </section>
+
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Grila de Comisioane și Praguri Săptămânale</h2>
+        <p style="text-align: center; color: #94a3b8; margin-bottom: 3rem;">Pornești de la comisionul standard de 8%, iar pe măsură ce atingi pragurile de comenzi pe săptămână, comisionul tău scade treptat!</p>
+        
+        <div class="card">
+            <h3>Structura Pragurilor de Comenzi</h3>
+            <ul>
+                <li><span>Sub 50 comenzi / săptămână</span> <strong>8% (Standard)</strong></li>
+                <li><span>Prag 1 (50 – 74 comenzi)</span> <strong class="highlight">7%</strong></li>
+                <li><span>Prag 2 (75 – 99 comenzi)</span> <strong class="highlight">6%</strong></li>
+                <li><span>Prag 3 (100 – 124 comenzi)</span> <strong class="highlight">4.5%</strong></li>
+                <li><span>Prag 4 (125+ comenzi - Maxim)</span> <strong class="highlight">4% (Minim)</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bubblehub SRL. Toate drepturile rezervate. | Glovo, Wolt, Bolt Food Fleet Partner.</p>
+    </footer>
+
+</body>
+</html>

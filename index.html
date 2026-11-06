@@ -90,13 +90,12 @@
 </head>
 <body class="antialiased selection:bg-accentPurple selection:text-white">
 
-    <!-- NAVBAR CU LOGO OFICIAL -->
+    <!-- NAVBAR -->
     <header class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
-            <!-- LOGO INTEGRAT DIN FISIERUL TAU -->
-            <a href="#" class="flex items-center gap-3 group">
-                <img src="logo.png" alt="Bubblehub SRL Logo" class="h-12 sm:h-14 w-auto object-contain rounded-xl shadow-md border border-purple-500/30 group-hover:scale-105 transition-transform">
+            <a href="#" class="flex items-center gap-3 group py-1">
+                <img src="logo.png" alt="Bubblehub SRL Logo" class="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(168,85,247,0.4)] group-hover:scale-105 transition-transform">
             </a>
 
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
@@ -172,8 +171,8 @@
                     <div class="text-xs text-gray-400 font-medium">Comision Progresiv pe Praguri</div>
                 </div>
                 <div class="glass-panel p-5 rounded-2xl border-purple-500/20">
-                    <div class="text-3xl font-extrabold text-pink-400 mb-1">Maxim 4%</div>
-                    <div class="text-xs text-gray-400 font-medium">Comision Minim La Volum</div>
+                    <div class="text-3xl font-extrabold text-pink-400 mb-1">Minim 4%</div>
+                    <div class="text-xs text-gray-400 font-medium">Comision Flotă La Volum Maxim</div>
                 </div>
                 <div class="glass-panel p-5 rounded-2xl border-purple-500/20">
                     <div class="text-3xl font-extrabold text-purple-300 mb-1">24/7</div>
@@ -283,16 +282,19 @@
                             <p class="text-xs text-gray-500 mt-1">Introdu suma brută totală afișată în aplicația ta săptămâna aceasta.</p>
                         </div>
 
-                        <!-- Input 2: Comenzi efectuate cu TOATE PRAGURILE PE SLIDER -->
+                        <!-- Input 2: Comenzi efectuate - EDITABIL + SLIDER -->
                         <div class="mb-6">
                             <div class="flex justify-between items-center mb-2">
                                 <label class="text-sm font-semibold text-gray-300 flex items-center gap-2">
                                     <i class="fa-solid fa-box-open text-accentPurple"></i>
                                     Număr total comenzi efectuate:
                                 </label>
-                                <span id="deliveriesVal" class="text-2xl font-black text-accentPurple bg-purple-950/60 border border-purple-500/30 px-4 py-1 rounded-xl">85</span>
+                                <!-- Căsuță editabilă direct pentru comenzi -->
+                                <input type="number" id="deliveriesInput" value="85" min="1" max="250" oninput="syncFromInput()" class="w-28 bg-darkBg border border-purple-500/40 rounded-xl px-3 py-1.5 text-white text-xl font-black text-center focus:outline-none focus:border-accentPurple shadow-inner">
                             </div>
-                            <input type="range" id="deliveriesSlider" min="10" max="150" step="1" value="85" oninput="calculateEarnings()">
+                            
+                            <!-- Slider sincronizat -->
+                            <input type="range" id="deliveriesSlider" min="10" max="150" step="1" value="85" oninput="syncFromSlider()">
                             
                             <!-- Vizualizare detaliată praguri pe slider -->
                             <div class="grid grid-cols-5 text-[10px] text-gray-400 mt-3 text-center font-medium border-t border-purple-500/10 pt-2">
@@ -300,7 +302,7 @@
                                 <div><span class="text-white font-bold">50–74</span><br/>7% (Prag 1)</div>
                                 <div><span class="text-white font-bold">75–99</span><br/>6% (Prag 2)</div>
                                 <div><span class="text-white font-bold">100–124</span><br/>4.5% (Prag 3)</div>
-                                <div><span class="text-white font-bold">125+</span><br/>4% (Maxim)</div>
+                                <div><span class="text-white font-bold">125+</span><br/>4% (Minim)</div>
                             </div>
                         </div>
                     </div>
@@ -407,12 +409,12 @@
                 </div>
 
                 <div class="glass-panel p-6 rounded-3xl border-2 border-pink-500 text-center relative overflow-hidden shadow-violet-glow bg-gradient-to-b from-cardBg to-purple-950/50">
-                    <div class="absolute top-0 right-0 bg-pink-600 text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-bl-xl">Maxim</div>
+                    <div class="absolute top-0 right-0 bg-pink-600 text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-bl-xl">Minim</div>
                     <div class="text-xs font-bold uppercase tracking-widest text-pink-400 mb-2">Prag 4</div>
                     <div class="text-xl font-black text-white mb-1">125+</div>
                     <div class="text-xs text-gray-400 mb-3">Comenzi / Săpt.</div>
                     <div class="text-2xl font-extrabold text-pink-400 bg-pink-950/50 py-2 rounded-xl border border-pink-500/30 mb-2">4%</div>
-                    <p class="text-[11px] text-pink-200">Minim absolut din piață</p>
+                    <p class="text-[11px] text-pink-200">Comision minim absolut</p>
                 </div>
             </div>
         </div>
@@ -511,7 +513,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div class="md:col-span-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <img src="logo.png" alt="Bubblehub SRL Logo" class="h-10 w-auto object-contain">
+                        <img src="logo.png" alt="Bubblehub SRL Logo" class="h-12 w-auto object-contain drop-shadow-[0_0_10px_rgba(168,85,247,0.3)]">
                         <span class="text-xl font-extrabold text-white tracking-tight">BUBBLEHUB <span class="text-accentPurple">SRL</span></span>
                     </div>
                     <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
@@ -643,7 +645,7 @@
         }
 
         const deliveriesSlider = document.getElementById('deliveriesSlider');
-        const deliveriesVal = document.getElementById('deliveriesVal');
+        const deliveriesInput = document.getElementById('deliveriesInput');
         const apkEarnings = document.getElementById('apkEarnings');
 
         const resGross = document.getElementById('resGross');
@@ -656,11 +658,24 @@
         const tierPercentText = document.getElementById('tierPercentText');
         const bonusProgressBar = document.getElementById('bonusProgressBar');
 
-        function calculateEarnings() {
-            const deliveries = parseInt(deliveriesSlider.value);
-            const gross = parseFloat(apkEarnings.value) || 0;
+        // Sincronizare de la slider la input
+        function syncFromSlider() {
+            deliveriesInput.value = deliveriesSlider.value;
+            calculateEarnings();
+        }
 
-            deliveriesVal.textContent = deliveries;
+        // Sincronizare de la input la slider
+        function syncFromInput() {
+            let val = parseInt(deliveriesInput.value) || 0;
+            if (val > 150) val = 150;
+            if (val < 1) val = 1;
+            deliveriesSlider.value = val;
+            calculateEarnings();
+        }
+
+        function calculateEarnings() {
+            const deliveries = parseInt(deliveriesInput.value) || 0;
+            const gross = parseFloat(apkEarnings.value) || 0;
 
             let commissionRate = 0.08;
             let nextTip = "";
@@ -705,7 +720,8 @@
             bonusProgressBar.style.width = progressPercent + '%';
         }
 
-        deliveriesSlider.addEventListener('input', calculateEarnings);
+        deliveriesSlider.addEventListener('input', syncFromSlider);
+        deliveriesInput.addEventListener('input', syncFromInput);
         apkEarnings.addEventListener('input', calculateEarnings);
 
         function toggleFaq(id) {

@@ -1,24 +1,739 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubblehub SRL - Flotă Livrări Glovo, Wolt, Bolt Food</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <title>Bubblehub SRL - Partener Premium Flotă Livrări (Glovo, Wolt, Bolt Food)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#080314',
+                        cardBg: '#120826',
+                        cardBorder: 'rgba(168, 85, 247, 0.2)',
+                        accentPurple: '#a855f7',
+                        accentDarkPurple: '#7e22ce',
+                        highlightPink: '#ec4899',
+                        glowViolet: '#c084fc',
+                    },
+                    boxShadow: {
+                        'violet-glow': '0 0 35px -5px rgba(168, 85, 247, 0.35)',
+                        'violet-card': '0 10px 30px -10px rgba(168, 85, 247, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background: #0b0f19; color: #fff; line-height: 1.6; }
-        header { background: #131b2e; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
-        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; color: #fff; }
-        .logo span { color: #c084fc; }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: #c084fc; }
-        .btn-primary { background: linear-gradient(135deg, #9333ea, #ec4899); color: white; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4); transition: transform 0.2s; display: inline-block; }
-        .btn-primary:hover { transform: translateY(-2px); }
-        .hero { text-align: center; padding: 5rem 1rem; background: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 70%); }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; background: linear-gradient(135deg, #c084fc, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: #94a3b8; max-width: 650px; margin: 0 auto 2rem auto; font-size: 1.15rem; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; }
-        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 1rem; font-weight: 800; }
-        .section-sub { text-align: center; color: #94a3b
+        body {
+            background-color: #080314;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(18, 8, 38, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.18);
+        }
+        .glass-nav {
+            background: rgba(8, 3, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 50%, #e879f9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: #1e1138;
+            height: 8px;
+            border-radius: 6px;
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c084fc, #9333ea);
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+            border: 2px solid #ffffff;
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+        .badge-glow {
+            animation: pulseGlow 3s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.7); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accentPurple selection:text-white">
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-11 h-11 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-accentPurple/30 rounded-full blur-md group-hover:bg-accentPurple/50 transition"></div>
+                    <svg class="w-11 h-11 relative z-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="orbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#a855f7" />
+                                <stop offset="50%" stop-color="#6b21a8" />
+                                <stop offset="100%" stop-color="#2e1065" />
+                            </linearGradient>
+                            <linearGradient id="metalB" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f5d0fe" />
+                                <stop offset="50%" stop-color="#d8b4fe" />
+                                <stop offset="100%" stop-color="#9333ea" />
+                            </linearGradient>
+                            <filter id="shadowGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#a855f7" flood-opacity="0.6"/>
+                            </filter>
+                        </defs>
+                        <ellipse cx="50" cy="50" rx="44" ry="44" stroke="url(#orbGrad)" stroke-width="4" stroke-dasharray="8 4" opacity="0.7"/>
+                        <ellipse cx="50" cy="50" rx="42" ry="20" stroke="#c084fc" stroke-width="3" transform="rotate(-30 50 50)" opacity="0.8"/>
+                        <circle cx="50" cy="50" r="30" fill="url(#orbGrad)" stroke="#d8b4fe" stroke-width="2"/>
+                        <path d="M42 33 H52 C57 33 60 35.5 60 39.5 C60 42.5 58 44.5 54 45.5 C59 46.5 61 49 61 52.5 C61 57 57 59.5 51 59.5 H42 V33 Z M47 43 H51 C54 43 55.5 42 55.5 40 C55.5 38 54 37 51 37 H47 V43 Z M47 55 H52 C55 55 56.5 54 56.5 51.5 C56.5 49 55 48 H52 H47 V55 Z" fill="url(#metalB)" filter="url(#shadowGlow)"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-1">
+                        BUBBLE<span class="text-accentPurple">HUB</span>
+                    </span>
+                    <span class="text-[10px] tracking-widest text-purple-300 font-semibold uppercase -mt-1">SRL • FLEET PARTNER</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#beneficii" class="hover:text-purple-300 transition-colors">Beneficii Flotă</a>
+                <a href="#calculator" class="hover:text-purple-300 transition-colors">Calcul Venituri</a>
+                <a href="#bonusuri" class="hover:text-purple-300 transition-colors">Praguri Comision</a>
+                <a href="#pasi" class="hover:text-purple-300 transition-colors">Cum Funcționează</a>
+                <a href="#faq" class="hover:text-purple-300 transition-colors">Întrebări Frecvente</a>
+            </nav>
+
+            <div class="hidden sm:flex items-center gap-4">
+                <button onclick="openSignupModal()" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-semibold rounded-xl group bg-gradient-to-br from-purple-500 via-accentPurple to-pink-500 text-white shadow-violet-glow hover:scale-[1.02] transition-transform duration-200">
+                    <span class="relative px-5 py-2.5 bg-darkBg rounded-[10px] group-hover:bg-opacity-0 font-bold">
+                        Devino Curier
+                    </span>
+                </button>
+            </div>
+
+            <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white p-2 text-xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-b border-accentPurple/20 px-4 pt-3 pb-6 space-y-3">
+            <a href="#beneficii" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-purple-900/40 text-gray-200 font-medium">Beneficii Flotă</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-purple-900/40 text-gray-200 font-medium">Calcul Venituri</a>
+            <a href="#bonusuri" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-purple-900/40 text-gray-200 font-medium">Praguri Comision</a>
+            <a href="#pasi" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-purple-900/40 text-gray-200 font-medium">Cum Funcționează</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-purple-900/40 text-gray-200 font-medium">Întrebări Frecvente</a>
+            <button onclick="toggleMobileMenu(); openSignupModal();" class="w-full mt-2 py-3 bg-gradient-to-r from-accentPurple to-pink-600 rounded-xl font-bold text-white shadow-lg">
+                Înscrie-te Acum
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accentPurple/20 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-pink-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-purple-500/30 text-purple-200 text-xs sm:text-sm font-semibold mb-8 badge-glow">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-emerald-400 font-bold">Flotă Parteneră Validată</span>
+                <span class="text-gray-400">•</span>
+                <span>Glovo • Wolt • Bolt Food</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6 leading-[1.15]">
+                Conduceți spre câștiguri maxime cu <br class="hidden sm:inline"/>
+                <span class="gradient-text">BUBBLEHUB SRL</span>
+            </h1>
+
+            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-purple-200/80 font-normal mb-10 leading-relaxed">
+                Partenerul tău premium pentru flote de livrări urbane. Comision standard de <strong class="text-white font-bold underline decoration-accentPurple decoration-2">8%</strong> care scade progresiv până la <strong class="text-emerald-400 font-bold">4%</strong> în funcție de performanța ta săptămânală!
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <button onclick="openSignupModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-accentPurple via-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-base rounded-2xl shadow-violet-glow hover:scale-105 transition-all duration-200 flex items-center justify-center gap-3">
+                    <span>Alătură-te Flotei Noastre</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <a href="#calculator" class="w-full sm:w-auto px-8 py-4 glass-panel border border-purple-500/30 hover:border-accentPurple text-white font-bold text-base rounded-2xl hover:bg-purple-950/40 transition-all duration-200 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calculator text-purple-400"></i>
+                    <span>Calculează Câștigul</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-16 text-left">
+                <div class="glass-panel p-5 rounded-2xl border-purple-500/20">
+                    <div class="text-3xl font-extrabold text-accentPurple mb-1">8% → 4%</div>
+                    <div class="text-xs text-gray-400 font-medium">Comision Progresiv pe Praguri</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border-purple-500/20">
+                    <div class="text-3xl font-extrabold text-pink-400 mb-1">Maxim 4%</div>
+                    <div class="text-xs text-gray-400 font-medium">Comision Minim La Volum</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border-purple-500/20">
+                    <div class="text-3xl font-extrabold text-purple-300 mb-1">24/7</div>
+                    <div class="text-xs text-gray-400 font-medium">Asistență Tehnică & Dispecerat</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border-purple-500/20">
+                    <div class="text-3xl font-extrabold text-emerald-400 mb-1">100%</div>
+                    <div class="text-xs text-gray-400 font-medium">Plăți La Timp (Săptămânal)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICII FLOTĂ SECTION -->
+    <section id="beneficii" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accentPurple mb-2">Avantaje Exclusive</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">De ce curierii profesioniști aleg <span class="gradient-text">Bubblehub</span>?</p>
+                <p class="text-gray-400 mt-3">Sistem corect și transparent prin care comisionul flotei scade pe măsură ce livrezi mai mult.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 hover:border-accentPurple/60 transition-all duration-300 group hover:-translate-y-2 shadow-violet-card">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600/30 to-accentPurple/10 border border-purple-500/30 flex items-center justify-center text-accentPurple text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line-down"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Comision Progresiv</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Începi de la 8% standard, iar pe măsură ce atingi pragurile săptămânale de comenzi, comisionul scade până la 4%.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 hover:border-accentPurple/60 transition-all duration-300 group hover:-translate-y-2 shadow-violet-card">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-600/30 to-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Plăți Săptămânale Sigure</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Primești banii la timp în fiecare săptămână în contul tău bancar, însoțiți de decontul detaliat și transparent.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 hover:border-accentPurple/60 transition-all duration-300 group hover:-translate-y-2 shadow-violet-card">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600/30 to-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Suport Dedicat 24/7</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Echipa noastră este mereu alături de tine pentru orice problemă tehnică sau operațională pe Glovo, Wolt și Bolt Food.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 hover:border-accentPurple/60 transition-all duration-300 group hover:-translate-y-2 shadow-violet-card">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600/30 to-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">CIM sau Colaborare B2B</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Flexibilitate legală deplină. Poți lucra legal prin Contract Individual de Muncă (CIM) sau prin propriul tău PFA / SRL.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR DE VENITURI INTERACTIV -->
+    <section id="calculator" class="py-20 relative bg-gradient-to-b from-transparent via-purple-950/20 to-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accentPurple mb-2">Simulează Câștigurile</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Calculator Inteligent de Comision & Venituri</p>
+                <p class="text-gray-400 mt-3">Ajustează numărul de comenzi săptămânale și vezi cum scade comisionul flotei tale în timp real.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Control Panel Sliders -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-purple-500/30 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-box text-accentPurple"></i>
+                                    Comenzi efectuate pe săptămână:
+                                </label>
+                                <span id="deliveriesVal" class="text-2xl font-black text-accentPurple bg-purple-950/60 border border-purple-500/30 px-4 py-1 rounded-xl">80</span>
+                            </div>
+                            <input type="range" id="deliveriesSlider" min="20" max="150" step="5" value="80">
+                            <div class="flex justify-between text-xs text-gray-500 mt-2 font-medium">
+                                <span>20 comenzi (8%)</span>
+                                <span>75 comenzi (6%)</span>
+                                <span>125+ comenzi (4%)</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-semibold text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-money-bill-wave text-emerald-400"></i>
+                                    Valoare medie per comandă (RON):
+                                </label>
+                                <span id="avgRateVal" class="text-2xl font-black text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-4 py-1 rounded-xl">22 RON</span>
+                            </div>
+                            <input type="range" id="avgRateSlider" min="18" max="30" step="1" value="22">
+                            <div class="flex justify-between text-xs text-gray-500 mt-2 font-medium">
+                                <span>18 RON</span>
+                                <span>24 RON</span>
+                                <span>30 RON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-950/40 p-4 rounded-2xl border border-purple-500/20">
+                        <div class="flex justify-between text-xs font-bold text-gray-300 mb-2">
+                            <span>Prag Săptămânal Curent:</span>
+                            <span id="bonusTierBadge" class="text-accentPurple">Prag 2 (6% Comision)</span>
+                        </div>
+                        <div class="w-full bg-gray-900 rounded-full h-3 overflow-hidden p-0.5 border border-purple-900">
+                            <div id="bonusProgressBar" class="bg-gradient-to-r from-accentPurple to-pink-500 h-full rounded-full transition-all duration-300" style="width: 64%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings Result Card -->
+                <div class="lg:col-span-5 glass-panel p-6 sm:p-8 rounded-3xl border border-accentPurple/50 shadow-violet-glow flex flex-col justify-between bg-gradient-to-b from-cardBg via-cardBg to-purple-950/40">
+                    <div>
+                        <h3 class="text-xs font-extrabold uppercase tracking-widest text-purple-300 mb-4 border-b border-purple-500/20 pb-3 flex items-center justify-between">
+                            <span>Rezumat Decont Săptămânal</span>
+                            <i class="fa-solid fa-receipt text-accentPurple"></i>
+                        </h3>
+
+                        <div class="space-y-3 mb-6 text-sm">
+                            <div class="flex justify-between text-gray-300">
+                                <span>Venit Brut (Comenzi):</span>
+                                <span id="grossEarnings" class="font-bold text-white">1,760 RON</span>
+                            </div>
+                            <div class="flex justify-between text-gray-300">
+                                <span class="flex items-center gap-1.5">
+                                    Comision Flotă Aplicat:
+                                </span>
+                                <span id="fleetFee" class="font-bold text-pink-400">-105.60 RON (6%)</span>
+                            </div>
+                            <div class="flex justify-between text-gray-300">
+                                <span>Economie vs Comision Standard 8%:</span>
+                                <span id="bonusAmount" class="font-bold text-emerald-400">+35.20 RON</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-purple-900/50 to-pink-900/30 p-5 rounded-2xl border border-purple-500/40 text-center mb-6">
+                            <div class="text-xs font-bold text-purple-200 uppercase tracking-wider mb-1">Venit Net Estimat Săptămânal</div>
+                            <div id="weeklyNet" class="text-4xl sm:text-5xl font-black text-white gradient-text">1,654 RON</div>
+                            <div class="text-[11px] text-gray-400 mt-1">*încasare săptămânală direct în contul tău</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold text-purple-200 bg-purple-950/60 px-4 py-3 rounded-xl border border-purple-500/20 mb-5">
+                            <span>Estimare Venit Net Lunar (4 săpt):</span>
+                            <span id="monthlyNet" class="text-xl font-extrabold text-emerald-400">6,618 RON</span>
+                        </div>
+
+                        <button onclick="openSignupModal()" class="w-full py-4 bg-gradient-to-r from-accentPurple to-pink-600 hover:from-purple-500 hover:to-pink-500 font-extrabold text-white rounded-xl shadow-lg hover:shadow-violet-glow transition-all">
+                            Vreau să colaborez cu Bubblehub
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRAGURI COMISION SECTION -->
+    <section id="bonusuri" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accentPurple mb-2">Sistem Transparent</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Grila de Praguri și Comisoane Săptămânale</p>
+                <p class="text-gray-400 mt-3">Cu cât livrezi mai mult, cu atât scade comisionul reținut de flotă. Tu păstrezi mai mulți bani!</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Prag 1 -->
+                <div class="glass-panel p-6 rounded-3xl border border-purple-500/20 text-center relative overflow-hidden group hover:border-purple-500/60 transition">
+                    <div class="text-xs font-bold uppercase tracking-widest text-purple-300 mb-2">Prag 1</div>
+                    <div class="text-2xl font-black text-white mb-1">50 – 74</div>
+                    <div class="text-xs text-gray-400 mb-4">Comenzi Săptămânale</div>
+                    <div class="text-3xl font-extrabold text-accentPurple bg-purple-950/40 py-2 rounded-xl border border-purple-500/20 mb-3">
+                        7%
+                    </div>
+                    <p class="text-xs text-gray-400">Reducere față de standardul de 8%.</p>
+                </div>
+
+                <!-- Prag 2 -->
+                <div class="glass-panel p-6 rounded-3xl border border-purple-500/20 text-center relative overflow-hidden group hover:border-purple-500/60 transition">
+                    <div class="text-xs font-bold uppercase tracking-widest text-purple-300 mb-2">Prag 2</div>
+                    <div class="text-2xl font-black text-white mb-1">75 – 99</div>
+                    <div class="text-xs text-gray-400 mb-4">Comenzi Săptămânale</div>
+                    <div class="text-3xl font-extrabold text-accentPurple bg-purple-950/40 py-2 rounded-xl border border-purple-500/20 mb-3">
+                        6%
+                    </div>
+                    <p class="text-xs text-gray-400">Ritm constant, economie mare.</p>
+                </div>
+
+                <!-- Prag 3 (Featured) -->
+                <div class="glass-panel p-6 rounded-3xl border-2 border-accentPurple text-center relative overflow-hidden shadow-violet-glow scale-105 bg-gradient-to-b from-cardBg to-purple-950/50">
+                    <div class="absolute top-0 right-0 bg-accentPurple text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl">Țintă 4-5%</div>
+                    <div class="text-xs font-bold uppercase tracking-widest text-accentPurple mb-2">Prag 3</div>
+                    <div class="text-2xl font-black text-white mb-1">100 – 124</div>
+                    <div class="text-xs text-gray-400 mb-4">Comenzi Săptămânale</div>
+                    <div class="text-3xl font-extrabold text-emerald-400 bg-emerald-950/50 py-2 rounded-xl border border-emerald-500/30 mb-3">
+                        4.5%
+                    </div>
+                    <p class="text-xs text-purple-200">Performanță ridicată full-time.</p>
+                </div>
+
+                <!-- Prag 4 (Maxim) -->
+                <div class="glass-panel p-6 rounded-3xl border border-pink-500/30 text-center relative overflow-hidden group hover:border-pink-500/70 transition">
+                    <div class="text-xs font-bold uppercase tracking-widest text-pink-400 mb-2">Prag Maxim</div>
+                    <div class="text-2xl font-black text-white mb-1">125+</div>
+                    <div class="text-xs text-gray-400 mb-4">Comenzi Săptămânale</div>
+                    <div class="text-3xl font-extrabold text-pink-400 bg-pink-950/40 py-2 rounded-xl border border-pink-500/20 mb-3">
+                        4%
+                    </div>
+                    <p class="text-xs text-gray-400">Comisionul minim absolut din piață.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCES ÎNSCRIERE / CUM FUNCȚIONEAZĂ -->
+    <section id="pasi" class="py-20 relative bg-purple-950/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accentPurple mb-2">Simplu și Rapid</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Cum devii curier în 3 pași</p>
+                <p class="text-gray-400 mt-3">Te ajutăm cu tot procesul ca tu să poți începe livrările în cel mai scurt timp.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 relative">
+                    <div class="w-12 h-12 rounded-full bg-accentPurple text-white font-black text-xl flex items-center justify-center mb-6 shadow-violet-glow">1</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Completezi Formularul</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Introdu datele tale de contact, orașul și aplicația preferată (Glovo, Wolt, Bolt Food).</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 relative">
+                    <div class="w-12 h-12 rounded-full bg-accentPurple text-white font-black text-xl flex items-center justify-center mb-6 shadow-violet-glow">2</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Semnarea Contractului</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Te contactăm rapid, semnăm actele (CIM sau PFA/SRL) și îți activăm conturile.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/20 relative">
+                    <div class="w-12 h-12 rounded-full bg-accentPurple text-white font-black text-xl flex items-center justify-center mb-6 shadow-violet-glow">3</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Livrezi & Încasezi</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Livrezi cu drag, iar noi îți virăm banii săptămânal cu comisionul redus automat pe praguri.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="openSignupModal()" class="px-8 py-4 bg-gradient-to-r from-accentPurple to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-base rounded-2xl shadow-violet-glow hover:scale-105 transition-all">
+                    Începe Procesul de Înregistrare Acum
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-accentPurple mb-2">Răspunsuri Rapide</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Întrebări Frecvente</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-panel rounded-2xl border border-purple-500/20 overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-accentPurple transition">
+                        <span>Cum funcționează comisionul progresiv la Bubblehub?</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-accentPurple transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-1" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-purple-500/10 pt-4">
+                        Comisionul standard de pornire este de 8% (sub 50 comenzi). Pe măsură ce atingi pragurile săptămânale (50-74 comenzi = 7%, 75-99 comenzi = 6%, 100-124 comenzi = 4.5% și 125+ comenzi = 4%), comisionul flotei scade automat.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl border border-purple-500/20 overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-accentPurple transition">
+                        <span>Când și cum se fac plățile?</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-accentPurple transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-2" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-purple-500/10 pt-4">
+                        Plățile se efectuează săptămânal, direct în contul tău bancar din România, în fiecare zi de marți/miercuri pentru săptămâna anterioară.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl border border-purple-500/20 overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-accentPurple transition">
+                        <span>Cu ce mijloace de transport pot livra?</span>
+                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-accentPurple transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-3" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-purple-500/10 pt-4">
+                        Poți livra cu mașina personală, scuter, bicicletă (clasică sau electrică) sau trotinetă electrică pe platformele Glovo, Wolt și Bolt Food.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl border border-purple-500/20 overflow-hidden">
+                    <button onclick="toggleFaq(4)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-accentPurple transition">
+                        <span>Ce acte sunt necesare pentru colaborare?</span>
+                        <i id="faq-icon-4" class="fa-solid fa-chevron-down text-accentPurple transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-4" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-purple-500/10 pt-4">
+                        Ai nevoie de Cartea de Identitate (CI), Cazier Judiciar curat și un cont bancar activ pe numele tău.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-purple-500/20 py-12 bg-darkBg text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-accentPurple flex items-center justify-center text-white font-bold text-sm">B</div>
+                        <span class="text-xl font-extrabold text-white tracking-tight">BUBBLEHUB <span class="text-accentPurple">SRL</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
+                        Flotă parteneră autorizată pentru curierat și livrări mâncare în România. Oferim stabilitate, sprijin permanent și comision descrescător în funcție de performanță.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Navigare Rapidă</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#beneficii" class="hover:text-accentPurple transition">Beneficii</a></li>
+                        <li><a href="#calculator" class="hover:text-accentPurple transition">Calculator Venituri</a></li>
+                        <li><a href="#bonusuri" class="hover:text-accentPurple transition">Praguri Comision</a></li>
+                        <li><a href="#faq" class="hover:text-accentPurple transition">Întrebări Frecvente</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact Flotă</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-accentPurple"></i> contact@bubblehub.ro</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-accentPurple"></i> +40 700 000 000</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-accentPurple"></i> România</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-900/40 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2026 Bubblehub SRL. Toate drepturile rezervate. Cod CAEN 5320.</p>
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-gray-300">Termeni și Condiții</a>
+                    <a href="#" class="hover:text-gray-300">Politica de Confidențialitate</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL INSCRIERE CURIER -->
+    <div id="signupModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-lg p-6 sm:p-8 rounded-3xl border border-accentPurple/50 relative shadow-violet-glow max-h-[90vh] overflow-y-auto">
+            <button onclick="closeSignupModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-accentPurple/20 border border-accentPurple/40 text-accentPurple text-2xl mb-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-white">Alătură-te Flotei Bubblehub</h3>
+                <p class="text-xs text-purple-300 mt-1">Completează datele de mai jos și te contactăm în maxim 2 ore.</p>
+            </div>
+            <form id="signupForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Nume & Prenume *</label>
+                    <input type="text" required placeholder="ex: Ion Popescu" class="w-full bg-purple-950/40 border border-purple-500/30 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-accentPurple">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Număr de Telefon (WhatsApp) *</label>
+                    <input type="tel" required placeholder="ex: 0722123456" class="w-full bg-purple-950/40 border border-purple-500/30 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-accentPurple">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Orașul tău *</label>
+                        <select required class="w-full bg-purple-950/80 border border-purple-500/30 rounded-xl px-3 py-3 text-white text-sm focus:outline-none focus:border-accentPurple">
+                            <option value="">Alege orașul...</option>
+                            <option value="bucuresti">București</option>
+                            <option value="cluj">Cluj-Napoca</option>
+                            <option value="timisoara">Timișoara</option>
+                            <option value="iasi">Iași</option>
+                            <option value="brasov">Brașov</option>
+                            <option value="constanta">Constanța</option>
+                            <option value="galati">Galați</option>
+                            <option value="altul">Alt oraș</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Platforma Preferată *</label>
+                        <select required class="w-full bg-purple-950/80 border border-purple-500/30 rounded-xl px-3 py-3 text-white text-sm focus:outline-none focus:border-accentPurple">
+                            <option value="glovo">Glovo</option>
+                            <option value="wolt">Wolt</option>
+                            <option value="bolt">Bolt Food</option>
+                            <option value="toate">Toate / Nu contează</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Mijloc de Transport *</label>
+                    <select required class="w-full bg-purple-950/80 border border-purple-500/30 rounded-xl px-3 py-3 text-white text-sm focus:outline-none focus:border-accentPurple">
+                        <option value="masina">Mașină Personală</option>
+                        <option value="scuter">Scuter / Motocicletă</option>
+                        <option value="bicicleta">Bicicletă / E-bike</option>
+                        <option value="trotineta">Trotinetă Electrică</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-4 mt-2 bg-gradient-to-r from-accentPurple via-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 font-extrabold text-white rounded-xl shadow-violet-glow transition-all">
+                    Trimite Solicitarea
+                </button>
+            </form>
+            <div id="formSuccessMessage" class="hidden text-center py-8">
+                <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-3xl mb-4">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white mb-2">Felicitări!</h4>
+                <p class="text-sm text-gray-300">Solicitarea ta a fost înregistrată cu succes în sistemul **Bubblehub SRL**. Un reprezentant te va contacta în scurt timp pe WhatsApp.</p>
+                <button onclick="closeSignupModal()" class="mt-6 px-6 py-2.5 bg-purple-900/60 hover:bg-purple-900 border border-purple-500/30 text-white font-bold rounded-xl text-sm">
+                    Închide
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const deliveriesSlider = document.getElementById('deliveriesSlider');
+        const avgRateSlider = document.getElementById('avgRateSlider');
+        
+        const deliveriesVal = document.getElementById('deliveriesVal');
+        const avgRateVal = document.getElementById('avgRateVal');
+
+        const grossEarningsEl = document.getElementById('grossEarnings');
+        const fleetFeeEl = document.getElementById('fleetFee');
+        const bonusAmountEl = document.getElementById('bonusAmount');
+        const weeklyNetEl = document.getElementById('weeklyNet');
+        const monthlyNetEl = document.getElementById('monthlyNet');
+        
+        const bonusTierBadge = document.getElementById('bonusTierBadge');
+        const bonusProgressBar = document.getElementById('bonusProgressBar');
+
+        function calculateEarnings() {
+            const deliveries = parseInt(deliveriesSlider.value);
+            const rate = parseInt(avgRateSlider.value);
+
+            deliveriesVal.textContent = deliveries;
+            avgRateVal.textContent = rate + ' RON';
+
+            const gross = deliveries * rate;
+
+            // Logica corecta de comision descrescator pe praguri
+            let commissionRate = 0.08;
+            let tierName = "Sub 50 comenzi (Standard 8%)";
+            let progressPercent = (deliveries / 125) * 100;
+
+            if (deliveries >= 125) {
+                commissionRate = 0.04;
+                tierName = "Prag Maxim 4% (Minim absolut)";
+            } else if (deliveries >= 100) {
+                commissionRate = 0.045;
+                tierName = "Prag 3 (4.5% Comision)";
+            } else if (deliveries >= 75) {
+                commissionRate = 0.06;
+                tierName = "Prag 2 (6% Comision)";
+            } else if (deliveries >= 50) {
+                commissionRate = 0.07;
+                tierName = "Prag 1 (7% Comision)";
+            }
+
+            const fee = gross * commissionRate;
+            const standardFee = gross * 0.08;
+            const savings = standardFee - fee; // Economia fata de 8% standard
+
+            const weeklyNet = gross - fee;
+            const monthlyNet = weeklyNet * 4;
+
+            grossEarningsEl.textContent = gross.toLocaleString('ro-RO') + ' RON';
+            fleetFeeEl.textContent = '-' + fee.toFixed(2) + ' RON (' + (commissionRate * 100) + '%)';
+            bonusAmountEl.textContent = savings > 0 ? '+' + savings.toFixed(2) + ' RON economisiți' : '0 RON';
+            weeklyNetEl.textContent = Math.round(weeklyNet).toLocaleString('ro-RO') + ' RON';
+            monthlyNetEl.textContent = Math.round(monthlyNet).toLocaleString('ro-RO') + ' RON';
+
+            bonusTierBadge.textContent = tierName;
+            bonusProgressBar.style.width = Math.min(progressPercent, 100) + '%';
+        }
+
+        deliveriesSlider.addEventListener('input', calculateEarnings);
+        avgRateSlider.addEventListener('input', calculateEarnings);
+
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                answer.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            document.getElementById('signupForm').classList.remove('hidden');
+            document.getElementById('formSuccessMessage').classList.add('hidden');
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            document.getElementById('signupForm').classList.add('hidden');
+            document.getElementById('formSuccessMessage').classList.remove('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+        calculateEarnings();
+    </script>
+</body>
+</html>

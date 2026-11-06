@@ -79,6 +79,11 @@
         input[type=range]::-webkit-slider-thumb:hover {
             transform: scale(1.15);
         }
+        /* Elimină complet fundalul imaginii logo-ului prin blend mode */
+        .logo-transparent {
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
+        }
         .badge-glow {
             animation: pulseGlow 3s infinite alternate;
         }
@@ -95,7 +100,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <a href="#" class="flex items-center gap-3 group py-1">
-                <img src="logo.png" alt="Bubblehub SRL Logo" class="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(168,85,247,0.4)] group-hover:scale-105 transition-transform">
+                <img src="logo.png" alt="Bubblehub SRL Logo" class="h-14 sm:h-16 w-auto object-contain logo-transparent group-hover:scale-105 transition-transform">
             </a>
 
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
@@ -289,11 +294,9 @@
                                     <i class="fa-solid fa-box-open text-accentPurple"></i>
                                     Număr total comenzi efectuate:
                                 </label>
-                                <!-- Căsuță editabilă direct pentru comenzi -->
                                 <input type="number" id="deliveriesInput" value="85" min="1" max="250" oninput="syncFromInput()" class="w-28 bg-darkBg border border-purple-500/40 rounded-xl px-3 py-1.5 text-white text-xl font-black text-center focus:outline-none focus:border-accentPurple shadow-inner">
                             </div>
                             
-                            <!-- Slider sincronizat -->
                             <input type="range" id="deliveriesSlider" min="10" max="150" step="1" value="85" oninput="syncFromSlider()">
                             
                             <!-- Vizualizare detaliată praguri pe slider -->
@@ -513,7 +516,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div class="md:col-span-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <img src="logo.png" alt="Bubblehub SRL Logo" class="h-12 w-auto object-contain drop-shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                        <img src="logo.png" alt="Bubblehub SRL Logo" class="h-12 w-auto object-contain logo-transparent">
                         <span class="text-xl font-extrabold text-white tracking-tight">BUBBLEHUB <span class="text-accentPurple">SRL</span></span>
                     </div>
                     <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
@@ -658,13 +661,11 @@
         const tierPercentText = document.getElementById('tierPercentText');
         const bonusProgressBar = document.getElementById('bonusProgressBar');
 
-        // Sincronizare de la slider la input
         function syncFromSlider() {
             deliveriesInput.value = deliveriesSlider.value;
             calculateEarnings();
         }
 
-        // Sincronizare de la input la slider
         function syncFromInput() {
             let val = parseInt(deliveriesInput.value) || 0;
             if (val > 150) val = 150;

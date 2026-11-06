@@ -4,51 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bubblehub SRL - Flotă Livrări Glovo, Wolt, Bolt Food</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background: #0b0f19; color: #fff; line-height: 1.6; }
-        header { background: #131b2e; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        header { background: #131b2e; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
         .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; color: #fff; }
         .logo span { color: #c084fc; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: #c084fc; }
+        .btn-primary { background: linear-gradient(135deg, #9333ea, #ec4899); color: white; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4); transition: transform 0.2s; display: inline-block; }
+        .btn-primary:hover { transform: translateY(-2px); }
         .hero { text-align: center; padding: 5rem 1rem; background: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 70%); }
         .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; background: linear-gradient(135deg, #c084fc, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: #94a3b8; max-width: 600px; margin: 0 auto 2rem auto; font-size: 1.1rem; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 3rem 1rem; }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .card { background: #131b2e; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .card h3 { color: #c084fc; margin-bottom: 1rem; font-size: 1.3rem; }
+        .hero p { color: #94a3b8; max-width: 650px; margin: 0 auto 2rem auto; font-size: 1.15rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 1rem; font-weight: 800; }
+        .section-sub { text-align: center; color: #94a3b8; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: #131b2e; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 16px; padding: 2.5rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: border-color 0.3s; }
+        .card:hover { border-color: rgba(192, 132, 252, 0.5); }
+        .card h3 { color: #c084fc; margin-bottom: 1rem; font-size: 1.4rem; }
         .highlight { color: #ec4899; font-weight: 700; }
         ul { list-style: none; }
-        ul li { padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
-        footer { text-align: center; padding: 3rem; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        ul li { padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
+        .calc-box { background: linear-gradient(135deg, #131b2e, #1e1b4b); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 20px; padding: 3rem; max-width: 700px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .calc-group { margin-bottom: 1.5rem; }
+        .calc-group label { display: block; margin-bottom: 0.5rem; color: #c084fc; font-weight: 600; }
+        .calc-group input { width: 100%; padding: 0.9rem; background: #0b0f19; border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 8px; color: #fff; font-size: 1.1rem; }
+        .calc-result { background: #0b0f19; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; border: 1px solid rgba(236, 72, 153, 0.3); }
+        .calc-result h4 { color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .calc-result .val { font-size: 2rem; font-weight: 900; color: #ec4899; }
+        footer { text-align: center; padding: 3rem; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; background: #0b0f19; }
     </style>
 </head>
 <body>
-
     <header>
         <div class="logo">BUBBLE<span>HUB</span> SRL</div>
-        <div style="color: #c084fc; font-weight: 600; font-size: 0.9rem;">Fleet Partner</div>
+        <div class="nav-links">
+            <a href="#praguri">Praguri Bonus</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#beneficii">Beneficii</a>
+            <a href="https://wa.me/" class="btn-primary" target="_blank">Devino Curier</a>
+        </div>
     </header>
 
     <section class="hero">
-        <h1>Conduceți spre câștiguri maxime</h1>
-        <p>Partenerul tău premium pentru flote de livrări urbane (Glovo, Wolt, Bolt Food). Comision flexibil bazat pe praguri de performanță!</p>
+        <h1>Conduceți spre câștiguri maxime cu Bubblehub SRL</h1>
+        <p>Partenerul tău premium pentru flote de livrări urbane (Glovo, Wolt, Bolt Food). Îți oferim un comision standard de 8% care scade progresiv până la 4% în funcție de performanța ta săptămânală!</p>
+        <a href="#calculator" class="btn-primary" style="font-size: 1.1rem; padding: 0.9rem 2rem;">Calculează Câștigul</a>
     </section>
 
-    <div class="container">
-        <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Grila de Comisioane și Praguri Săptămânale</h2>
-        <p style="text-align: center; color: #94a3b8; margin-bottom: 3rem;">Pornești de la comisionul standard de 8%, iar pe măsură ce atingi pragurile de comenzi pe săptămână, comisionul tău scade treptat!</p>
+    <div class="container" id="praguri">
+        <h2 class="section-title">Grila de Comisioane și Praguri Săptămânale</h2>
+        <p class="section-sub">Sistem transparent și motivant: cu cât livrezi mai mult pe săptămână, cu atât comisionul reținut de flotă scade!</p>
         
-        <div class="card">
-            <h3>Structura Pragurilor de Comenzi</h3>
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <h3>Structura Pragurilor de Performanță</h3>
             <ul>
                 <li><span>Sub 50 comenzi / săptămână</span> <strong>8% (Standard)</strong></li>
-                <li><span>Prag 1 (50 – 74 comenzi)</span> <strong class="highlight">7%</strong></li>
-                <li><span>Prag 2 (75 – 99 comenzi)</span> <strong class="highlight">6%</strong></li>
-                <li><span>Prag 3 (100 – 124 comenzi)</span> <strong class="highlight">4.5%</strong></li>
-                <li><span>Prag 4 (125+ comenzi - Maxim)</span> <strong class="highlight">4% (Minim)</strong></li>
+                <li><span>Prag 1 (50 – 74 comenzi / săptămână)</span> <strong class="highlight">7%</strong></li>
+                <li><span>Prag 2 (75 – 99 comenzi / săptămână)</span> <strong class="highlight">6%</strong></li>
+                <li><span>Prag 3 (100 – 124 comenzi / săptămână)</span> <strong class="highlight">4.5%</strong></li>
+                <li><span>Prag 4 (125+ comenzi / săptămână - Maxim)</span> <strong class="highlight">4% (Minim)</strong></li>
             </ul>
+        </div>
+    </div>
+
+    <div class="container" id="calculator">
+        <h2 class="section-title">Calculator Venituri și Comision</h2>
+        <p class="section-sub">Simulează-ți câștigurile săptămânale în funcție de comenzile efectuate.</p>
+        
+        <div class="calc-box">
+            <div class="calc-group">
+                <label>Număr comenzi pe săptămână:</label>
+                <input type="number" id="orders" value="60" min="1" max="200" oninput="calculate()">
+            </div>
+            <div class="calc-group">
+                <label>Câștig brut estimat (RON):</label>
+                <input type="number" id="earnings" value="1200" min="100" max="10000" oninput="calculate()">
+            </div>
+            <div class="calc-result">
+                <h4>Comision aplicat & Câștig Net Flotă:</h4>
+                <div id="commRate" style="color: #c084fc; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem;">Comision: 7%</div>
+                <div class="val" id="netEarnings">1.116 RON</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="beneficii">
+        <h2 class="section-title">De ce să alegi Bubblehub SRL?</h2>
+        <p class="section-sub">Tot ce ai nevoie pentru o colaborare sigură, flexibilă și profitabilă.</p>
+        
+        <div class="grid-3">
+            <div class="card">
+                <h3>⚡ Plăți Săptămânale</h3>
+                <p style="color: #94a3b8;">Primești banii la timp în fiecare săptămână, fără întârzieri sau bătăi de cap cu contabilitatea.</p>
+            </div>
+            <div class="card">
+                <h3>📉 Comision Progresiv</h3>
+                <p style="color: #94a3b8;">Pornești de la 8% și ajungi până la 4% comision minim prin sistemul nostru automat de praguri săptămânale.</p>
+            </div>
+            <div class="card">
+                <h3>🤝 Suport Dedicat 24/7</h3>
+                <p style="color: #94a3b8;">Echipa noastră este mereu alături de tine pentru orice problemă tehnică sau operațională pe Glovo, Wolt și Bolt Food.</p>
+            </div>
         </div>
     </div>
 
@@ -56,5 +117,32 @@
         <p>&copy; 2026 Bubblehub SRL. Toate drepturile rezervate. | Glovo, Wolt, Bolt Food Fleet Partner.</p>
     </footer>
 
+    <script>
+        function calculate() {
+            let orders = parseInt(document.getElementById('orders').value) || 0;
+            let earnings = parseFloat(document.getElementById('earnings').value) || 0;
+            let rate = 0.08;
+            let rateText = "8% (Standard)";
+
+            if (orders >= 125) {
+                rate = 0.04;
+                rateText = "4% (Maxim - Minim absolut)";
+            } else if (orders >= 100) {
+                rate = 0.045;
+                rateText = "4.5% (Prag 3)";
+            } else if (orders >= 75) {
+                rate = 0.06;
+                rateText = "6% (Prag 2)";
+            } else if (orders >= 50) {
+                rate = 0.07;
+                rateText = "7% (Prag 1)";
+            }
+
+            let net = earnings * (1 - rate);
+            document.getElementById('commRate').innerText = "Comision aplicat: " + rateText;
+            document.getElementById('netEarnings').innerText = net.toFixed(2) + " RON";
+        }
+        calculate();
+    </script>
 </body>
 </html>
